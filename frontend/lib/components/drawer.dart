@@ -43,8 +43,8 @@ class CustomAppBar extends StatelessWidget {
             opacity: 1,
             child: Image.asset(
               'lib/images/logoSI.png',
-              width: 35,
-              height: 35,
+              width: 150,
+              height: 150,
             ),
           ),
         ],
@@ -52,7 +52,7 @@ class CustomAppBar extends StatelessWidget {
       actions: <Widget>[
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/login');
+            Navigator.pushNamed(context, '/');
           },
           child: Opacity(
             opacity: 1,

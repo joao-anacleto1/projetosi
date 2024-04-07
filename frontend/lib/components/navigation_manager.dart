@@ -22,6 +22,12 @@ class NavigationManager {
       case 4:
         routeName = '/settings';
         break;
+      case 5:
+        routeName = '/change_password.dart';
+        break;
+      case 6:
+        routeName = '/register';
+        break;
       default:
         routeName = '/';
     }

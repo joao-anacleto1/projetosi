@@ -23,7 +23,7 @@ class InputField extends StatelessWidget {
           labelText: labelText,
           labelStyle: const TextStyle(color: Color.fromRGBO(86, 140, 125, 1)),
           filled: true,
-          fillColor: const Color.fromRGBO(81, 166, 102, 0.5),
+          fillColor: const Color.fromRGBO(94, 191, 118, 0.5),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Color.fromRGBO(81, 166, 102, 0.2),

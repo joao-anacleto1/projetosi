@@ -5,7 +5,7 @@ class AppPages extends StatelessWidget {
   final String currentPageTitle;
   final int currentPageIndex;
   final ValueChanged<int> onMenuItemSelected;
-  final List<IconData> pageIcons;
+  final List<Icon> pageIcons;
 
   const AppPages({
     Key? key,
@@ -19,11 +19,12 @@ class AppPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: const Color.fromRGBO(233, 242, 237, 1),
       child: ListView(
         children: <Widget>[
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: Color.fromRGBO(233, 242, 237, 1),
+              color: Color.fromRGBO(94, 191, 118, 1),
             ),
             child: Center(
               child: Column(
@@ -42,9 +43,9 @@ class AppPages extends StatelessWidget {
             int index = entry.key + 1;
             final item = entry.value;
             return ListTile(
-              selectedTileColor: const Color.fromRGBO(94, 191, 118, 0.2),
-              selectedColor: const Color.fromRGBO(94, 191, 118, 1),
-              leading: Icon(pageIcons[index - 1]),
+              selectedTileColor: const Color.fromRGBO(86, 140, 125, 0.2),
+              selectedColor: const Color.fromRGBO(86, 140, 125, 1),
+              leading: pageIcons[index - 1],
               title: Text(item),
               onTap: () {
                 Navigator.pop(context); // Fecha o drawer após a seleção

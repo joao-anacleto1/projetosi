@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:projetoSI/pages/chat.dart';
+import 'package:projetoSI/pages/change_password.dart';
 import 'package:projetoSI/pages/home.dart';
 import 'package:projetoSI/pages/login.dart';
 import 'package:projetoSI/pages/profile.dart';
+import 'package:projetoSI/pages/register.dart';
 import 'package:projetoSI/pages/settings.dart';
 
 void main() {
@@ -18,14 +20,16 @@ final menuItems = [
   'Settings',
 ];
 
+
 // Page Icons ----------------------------
 
-final List<IconData> pageIcons = [
-  Icons.home,
-  Icons.chat,
-  Icons.person,
-  Icons.settings,
+final List<Icon> pageIcons = [
+  const Icon(Icons.home, color: Color.fromRGBO(86, 140, 125, 1)),
+  const Icon(Icons.chat, color: Color.fromRGBO(86, 140, 125, 1)),
+  const Icon(Icons.person, color: Color.fromRGBO(86, 140, 125, 1)),
+  const Icon(Icons.settings, color: Color.fromRGBO(86, 140, 125, 1)),
 ];
+
 
 // -----------------------------------------
 
@@ -47,6 +51,8 @@ class MainApp extends StatelessWidget {
         '/chat': (context) => const ChatPage(),
         '/user_profile': (context) => const ProfilePage(),
         '/settings': (context) => const SettingsPage(),
+        '/change_password.dart': (context) => const ChangePasswordPage(),
+        '/register': (context) => const RegisterPage(),
       },
     );
   }
