@@ -1,16 +1,5 @@
 # projetosi
 
-A new Flutter project.
+# Palete de cores utilizada:
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![palete_app_SI](https://github.com/joao-anacleto1/projetosi/assets/100430307/cb51e9e2-636b-4c41-8972-60cdc0ff309e)
