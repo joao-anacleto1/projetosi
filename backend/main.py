@@ -109,6 +109,26 @@ def delete_message(message_id):
     return jsonify({'message': 'Message deleted successfully'})
 
 
+# mudança da password
+@app.route('/change_password', methods=['POST'])
+def change_password():
+    data = request.json
+    username = data.get('username')
+    old_password = data.get('old_password')
+    new_password = data.get('new_password')
+
+    user = User.query.filter_by(username=username).first()
+
+    if not user or not bcrypt.check_password_hash(user.password, old_password):
+        return jsonify({'message': 'Invalid username or password'}), 401
+
+    hashed_new_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+    user.password = hashed_new_password
+    db.session.commit()
+
+    return jsonify({'message': 'Password changed successfully'})
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
