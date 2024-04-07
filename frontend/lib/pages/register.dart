@@ -1,17 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../components/input_field.dart';
-
-String usernameController = "";
-String passwordController = "";
-String emailController = "";
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    String username = "";
+    String password = "";
+    String email = "";
+
+    Future<void> registerUser() async {
+      final response = await http.post(
+        Uri.parse('http://localhost:5000/register'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'username': username,
+          'password': password,
+          'email': email,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // Registro bem sucedido
+        print('User registered successfully');
+        // Navegar para a próxima tela (home)
+        Navigator.pushNamed(context, '/');
+      } else {
+        // Registro falhou
+        print('Failed to register user');
+        // Exibir mensagem de erro para o usuário
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to register user'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -73,7 +106,7 @@ class RegisterPage extends StatelessWidget {
                 InputField(
                   labelText: 'Username',
                   onChanged: (value) {
-                    usernameController = value;
+                    username = value;
                   },
                 ),
                 const SizedBox(height: 20),
@@ -81,14 +114,14 @@ class RegisterPage extends StatelessWidget {
                   labelText: 'Password',
                   isPassword: true,
                   onChanged: (value) {
-                    passwordController = value;
+                    password = value;
                   },
                 ),
                 const SizedBox(height: 20),
                 InputField(
                   labelText: 'Email',
                   onChanged: (value) {
-                    emailController = value;
+                    email = value;
                   },
                 ),
                 const SizedBox(height: 20),
@@ -96,10 +129,7 @@ class RegisterPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
-                          // LOGICA PARA REGISTAR USERS - INTERLIGADO
-                          // COM O BACKEND
-                        },
+                        onPressed: registerUser,
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                             const Color.fromRGBO(94, 191, 118, 0.9),

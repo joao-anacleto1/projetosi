@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../components/input_field.dart';
 
@@ -11,6 +13,36 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> loginUser() async {
+      final response = await http.post(
+        Uri.parse('http://localhost:5000/login'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'username': usernameController,
+          'password': passwordController,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // Login bem sucedido
+        print('Login successful');
+        // Navegar para a próxima tela (home)
+        Navigator.pushNamed(context, '/home');
+      } else {
+        // Login falhou
+        print('Invalid username or password');
+        // Exibir mensagem de erro para o user
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Invalid username or password'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -90,7 +122,7 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            'Want change yout password?',
+                            'Want to change your password?',
                             style: GoogleFonts.roboto(
                               textStyle: const TextStyle(
                                 fontSize: 12,
@@ -108,9 +140,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/home');
-                        },
+                        onPressed: loginUser, // Chamar a função para fazer login
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                             const Color.fromRGBO(94, 191, 118, 0.9),
@@ -140,7 +170,6 @@ class LoginPage extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          //LOGICA PARA USER CONSEGUIR FAZER LOGIN - BACKEND
                           Navigator.pushNamed(context, '/register');
                         },
                         style: ButtonStyle(

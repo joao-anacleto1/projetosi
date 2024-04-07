@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -122,7 +124,8 @@ def change_password():
     if not user or not bcrypt.check_password_hash(user.password, old_password):
         return jsonify({'message': 'Invalid username or password'}), 401
 
-    hashed_new_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+    hashed_new_password = bcrypt.generate_password_hash(
+        new_password).decode('utf-8')
     user.password = hashed_new_password
     db.session.commit()
 
