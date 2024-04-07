@@ -25,7 +25,8 @@ class Message(db.Model):
 def home():
     return jsonify({'message': 'Welcome to the DDoS App'})
 
-# Registrar um novo utilizador
+
+# registrar um novo utilizador
 @app.route('/register', methods=['POST'])
 def register():
     data = request.json
@@ -40,7 +41,8 @@ def register():
 
     return jsonify({'message': 'User registered successfully'})
 
-# Login do utilizador
+
+# login do utilizador
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -54,7 +56,8 @@ def login():
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
 
-# Envio de mensagens
+
+# envio de mensagens
 @app.route('/send_message', methods=['POST'])
 def send_message():
     data = request.json
@@ -67,7 +70,8 @@ def send_message():
 
     return jsonify({'message': 'Message sent successfully'})
 
-# Receber mensagens
+
+# receber mensagens
 @app.route('/get_messages', methods=['GET'])
 def get_messages():
     messages = Message.query.all()
@@ -75,7 +79,8 @@ def get_messages():
                            'content': message.content} for message in messages]
     return jsonify({'messages': formatted_messages})
 
-# Editar o perfil de utilizador
+
+# editar o perfil de utilizador
 @app.route('/edit_profile/<int:user_id>', methods=['PUT'])
 def edit_profile(user_id):
     user = User.query.get(user_id)
@@ -90,7 +95,8 @@ def edit_profile(user_id):
 
     return jsonify({'message': 'Profile updated successfully'})
 
-# Eliminar uma mensagem
+
+# eliminar uma mensagem
 @app.route('/delete_message/<int:message_id>', methods=['DELETE'])
 def delete_message(message_id):
     message = Message.query.get(message_id)
