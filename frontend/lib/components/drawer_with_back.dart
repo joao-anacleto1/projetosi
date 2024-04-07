@@ -11,7 +11,7 @@ class CustomAppBarWithBack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color.fromRGBO(143, 194, 104, 1),
+      backgroundColor: const Color.fromRGBO(94, 191, 118, 1),
       leading: GestureDetector(
         onTap: onBackButtonPressed,
         child: Opacity(

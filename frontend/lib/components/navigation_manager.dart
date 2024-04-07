@@ -11,22 +11,16 @@ class NavigationManager {
 
     switch (index) {
       case 1:
-        routeName = '/login';
-        break;
-      case 2:
-        routeName = '/registration';
+        routeName = '/home';
         break;
       case 3:
         routeName = '/chat';
         break;
-      case 4:
+      case 3:
         routeName = '/user_profile';
         break;
-      case 5:
-        routeName = '/configuration';
-        break;
-      case 6:
-        routeName = '/password_recovery';
+      case 4:
+        routeName = '/settings';
         break;
       default:
         routeName = '/';

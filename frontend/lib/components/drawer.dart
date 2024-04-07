@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color.fromRGBO(143, 194, 104, 1),
+      backgroundColor: const Color.fromRGBO(94, 191, 118, 1),
       leading: Builder(
         builder: (BuildContext context) {
           return GestureDetector(
@@ -59,7 +59,7 @@ class CustomAppBar extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.all(10.0),
               alignment: Alignment.center,
-              child: const Icon(Icons.dashboard, size: 35,),
+              child: const Icon(Icons.person, size: 35,),
             ),
           ),
         ),
