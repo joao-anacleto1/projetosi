@@ -13,19 +13,16 @@ class NavigationManager {
       case 1:
         routeName = '/home';
         break;
-      case 3:
+      case 2:
         routeName = '/chat';
         break;
       case 3:
         routeName = '/user_profile';
         break;
       case 4:
-        routeName = '/settings';
-        break;
-      case 5:
         routeName = '/change_password.dart';
         break;
-      case 6:
+      case 5:
         routeName = '/register';
         break;
       default:

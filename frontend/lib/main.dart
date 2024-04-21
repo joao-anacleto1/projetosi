@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:projetoSI/pages/chat.dart';
-import 'package:projetoSI/pages/change_password.dart';
+import 'package:projetoSI/pages/lrc/change_password.dart';
 import 'package:projetoSI/pages/home.dart';
-import 'package:projetoSI/pages/login.dart';
+import 'package:projetoSI/pages/lrc/login.dart';
 import 'package:projetoSI/pages/profile.dart';
-import 'package:projetoSI/pages/register.dart';
+import 'package:projetoSI/pages/lrc/register.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,7 +16,6 @@ final menuItems = [
   'Home',
   'Chat',
   'User Profile',
-  'Settings',
 ];
 
 
@@ -26,7 +25,6 @@ final List<Icon> pageIcons = [
   const Icon(Icons.home, color: Color.fromRGBO(86, 140, 125, 1)),
   const Icon(Icons.chat, color: Color.fromRGBO(86, 140, 125, 1)),
   const Icon(Icons.person, color: Color.fromRGBO(86, 140, 125, 1)),
-  const Icon(Icons.settings, color: Color.fromRGBO(86, 140, 125, 1)),
 ];
 
 

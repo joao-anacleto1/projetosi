@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../components/input_field.dart';
+import '../../components/input_field.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key});

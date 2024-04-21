@@ -3,40 +3,42 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../components/input_field.dart';
+import '../../components/input_field.dart';
 
 String usernameController = "";
-String passwordController = "";
+String oldPasswordController = "";
+String newPasswordController = "";
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key});
+class ChangePasswordPage extends StatelessWidget {
+  const ChangePasswordPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    Future<void> loginUser() async {
+    Future<void> changePassword() async {
       final response = await http.post(
-        Uri.parse('http://localhost:5000/login'),
+        Uri.parse('http://localhost:5000/change_password'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, String>{
           'username': usernameController,
-          'password': passwordController,
+          'old_password': oldPasswordController,
+          'new_password': newPasswordController,
         }),
       );
 
       if (response.statusCode == 200) {
-        // Login bem sucedido
-        print('Login successful');
+        // Mudança de senha bem sucedida
+        print('Password changed successfully');
         // Navegar para a próxima tela (home)
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushNamed(context, '/');
       } else {
-        // Login falhou
-        print('Invalid username or password');
-        // Exibir mensagem de erro para o user
+        // Mudança de senha falhou
+        print('Failed to change password');
+        // Exibir mensagem de erro para o usuário
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Invalid username or password'),
+            content: Text('Failed to change password'),
             backgroundColor: Colors.red,
           ),
         );
@@ -70,6 +72,20 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Color.fromRGBO(94, 191, 118, 1),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
                 Image.asset(
                   'lib/images/logoSI4.png',
                   width: 170,
@@ -77,7 +93,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  "Login",
+                  "Change Password",
                   style: GoogleFonts.roboto(
                     textStyle: const TextStyle(
                       fontSize: 40,
@@ -95,52 +111,26 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 InputField(
-                  labelText: 'Password',
+                  labelText: 'Old Password',
                   isPassword: true,
                   onChanged: (value) {
-                    passwordController = value;
+                    oldPasswordController = value;
+                  },
+                ),
+                const SizedBox(height: 20),
+                InputField(
+                  labelText: 'New Password',
+                  isPassword: true,
+                  onChanged: (value) {
+                    newPasswordController = value;
                   },
                 ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/change_password.dart');
-                          },
-                          style: ButtonStyle(
-                            overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                                  (states) {
-                                if (states.contains(MaterialState.hovered)) {
-                                  return Colors.green.withOpacity(0.2);
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          child: Text(
-                            'Want to change your password?',
-                            style: GoogleFonts.roboto(
-                              textStyle: const TextStyle(
-                                fontSize: 12,
-                                color: Color.fromRGBO(94, 191, 118, 0.9),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
                       child: ElevatedButton(
-                        onPressed: loginUser, // Chamar a função para fazer login
+                        onPressed: changePassword,
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                             const Color.fromRGBO(94, 191, 118, 0.9),
@@ -154,38 +144,7 @@ class LoginPage extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           child: Text(
-                            'Log In',
-                            style: GoogleFonts.roboto(
-                              textStyle: const TextStyle(
-                                color: Color.fromRGBO(233, 242, 237, 0.8),
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/register');
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromRGBO(94, 191, 118, 0.9),
-                          ),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: Text(
-                            'Register',
+                            'Change Password',
                             style: GoogleFonts.roboto(
                               textStyle: const TextStyle(
                                 color: Color.fromRGBO(233, 242, 237, 0.8),
