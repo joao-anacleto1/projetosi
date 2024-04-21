@@ -5,7 +5,6 @@ import 'package:projetoSI/pages/home.dart';
 import 'package:projetoSI/pages/login.dart';
 import 'package:projetoSI/pages/profile.dart';
 import 'package:projetoSI/pages/register.dart';
-import 'package:projetoSI/pages/settings.dart';
 
 void main() {
   runApp(const MainApp());
@@ -50,7 +49,6 @@ class MainApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/chat': (context) => const ChatPage(),
         '/user_profile': (context) => const ProfilePage(),
-        '/settings': (context) => const SettingsPage(),
         '/change_password.dart': (context) => const ChangePasswordPage(),
         '/register': (context) => const RegisterPage(),
       },
