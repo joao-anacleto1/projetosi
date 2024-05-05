@@ -12,7 +12,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  int currentPage = 3;
+  int currentPage = 5;
   late NavigationManager navigationManager;
 
 

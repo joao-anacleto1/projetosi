@@ -4,15 +4,15 @@ import '../components/drawer.dart';
 import '../components/navigation_manager.dart';
 import '../main.dart';
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
+class MakeNewsPage extends StatefulWidget {
+  const MakeNewsPage({Key? key}) : super(key: key);
 
   @override
-  _ChatPageState createState() => _ChatPageState();
+  _MakeNewsPageState createState() => _MakeNewsPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
-  int currentPage = 4;
+class _MakeNewsPageState extends State<MakeNewsPage> {
+  int currentPage = 2;
   late NavigationManager navigationManager;
 
 

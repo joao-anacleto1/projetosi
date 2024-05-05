@@ -3,6 +3,8 @@ import 'package:projetoSI/pages/chat.dart';
 import 'package:projetoSI/pages/lrc/change_password.dart';
 import 'package:projetoSI/pages/home.dart';
 import 'package:projetoSI/pages/lrc/login.dart';
+import 'package:projetoSI/pages/publishNews.dart';
+import 'package:projetoSI/pages/newsList.dart';
 import 'package:projetoSI/pages/profile.dart';
 import 'package:projetoSI/pages/lrc/register.dart';
 
@@ -14,6 +16,8 @@ void main() {
 
 final menuItems = [
   'Home',
+  'Publish News',
+  'News List',
   'Chat',
   'User Profile',
 ];
@@ -23,6 +27,8 @@ final menuItems = [
 
 final List<Icon> pageIcons = [
   const Icon(Icons.home, color: Color.fromRGBO(86, 140, 125, 1)),
+  const Icon(Icons.newspaper, color: Color.fromRGBO(86, 140, 125, 1)),
+  const Icon(Icons.list_alt_outlined, color: Color.fromRGBO(86, 140, 125, 1)),
   const Icon(Icons.chat, color: Color.fromRGBO(86, 140, 125, 1)),
   const Icon(Icons.person, color: Color.fromRGBO(86, 140, 125, 1)),
 ];
@@ -49,6 +55,8 @@ class MainApp extends StatelessWidget {
         '/user_profile': (context) => const ProfilePage(),
         '/change_password.dart': (context) => const ChangePasswordPage(),
         '/register': (context) => const RegisterPage(),
+        '/publish_news' : (context) => const MakeNewsPage(),
+        '/news_list' : (context) => const NewsListPage(),
       },
     );
   }

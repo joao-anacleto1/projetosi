@@ -25,6 +25,12 @@ class NavigationManager {
       case 5:
         routeName = '/register';
         break;
+      case 6:
+        routeName = '/publish_news';
+        break;
+      case 7:
+        routeName = '/news_list';
+        break;
       default:
         routeName = '/';
     }
