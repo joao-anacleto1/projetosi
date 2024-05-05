@@ -23,6 +23,13 @@ class Message(db.Model):
     content = db.Column(db.Text, nullable=False)
 
 
+class News(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    theme = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+
+
 @app.route('/')
 def home():
     return jsonify({'message': 'Welcome to the DDoS App'})
@@ -130,6 +137,22 @@ def change_password():
     db.session.commit()
 
     return jsonify({'message': 'Password changed successfully'})
+
+
+@app.route('/send_news', methods=['POST'])
+def send_news():
+    data = request.json
+    print(data)  # Adicione esta linha para verificar os dados recebidos
+    title = data.get('title')
+    theme = data.get('theme')
+    description = data.get('description')
+
+    new_news = News(title=title, theme=theme, description=description)
+    db.session.add(new_news)
+    db.session.commit()
+
+    return jsonify({'message': 'News created successfully'})
+
 
 
 if __name__ == '__main__':

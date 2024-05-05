@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/app_pages.dart';
@@ -55,9 +57,11 @@ class _HomePageState extends State<HomePage>
   void animateText(String text) {
     for (int i = 0; i <= text.length; i++) {
       Future.delayed(Duration(milliseconds: 100 * i), () {
-        setState(() {
-          welcomeText = text.substring(0, i);
-        });
+        if (mounted) {
+          setState(() {
+            welcomeText = text.substring(0, i);
+          });
+        }
       });
     }
   }
