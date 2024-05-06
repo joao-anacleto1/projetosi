@@ -109,11 +109,13 @@ class LoginPage extends StatelessWidget {
                         cursor: SystemMouseCursors.click,
                         child: TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/change_password.dart');
+                            Navigator.pushNamed(
+                                context, '/change_password.dart');
                           },
                           style: ButtonStyle(
-                            overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                                  (states) {
+                            overlayColor:
+                                MaterialStateProperty.resolveWith<Color?>(
+                              (states) {
                                 if (states.contains(MaterialState.hovered)) {
                                   return Colors.green.withOpacity(0.2);
                                 }
@@ -140,7 +142,8 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: loginUser, // Chamar a função para fazer login
+                        onPressed: loginUser,
+                        // Chamar a função para fazer login
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                             const Color.fromRGBO(94, 191, 118, 0.9),

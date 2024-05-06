@@ -2,46 +2,23 @@ import 'package:flutter/material.dart';
 
 class CustomAppBarWithBack extends StatelessWidget {
   final Function() onBackButtonPressed;
+  final String title;
 
   const CustomAppBarWithBack({
     Key? key,
     required this.onBackButtonPressed,
+    required this.title,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: const Color.fromRGBO(94, 191, 118, 1),
-      leading: GestureDetector(
-        onTap: onBackButtonPressed,
-        child: Opacity(
-          opacity: 0.9,
-          child: Container(
-            margin: const EdgeInsets.all(10.0),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('lib/images/arrowBack.png'),
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-            width: 25,
-            height: 25,
-          ),
-        ),
+      leading: IconButton(
+        onPressed: onBackButtonPressed,
+        icon: const Icon(Icons.arrow_back),
       ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Opacity(
-            opacity: 1,
-            child: Image.asset(
-              'lib/images/logoSI.png',
-              width: 35,
-              height: 35,
-            ),
-          ),
-        ],
-      ),
+      title: Text(title),
     );
   }
 }

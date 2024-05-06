@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage>
 
     //atrasa o aparecimento do texto
     Future.delayed(const Duration(milliseconds: 500), () {
-      animateText('Troque mensagens sobre diversos temas!');
+      animateText('Publique notícias e mantenha a comunidade informada!');
     });
   }
 
@@ -104,9 +104,10 @@ class _HomePageState extends State<HomePage>
                   color: Color.fromRGBO(202, 245, 216, 1),
                 ),
                 child: Image.asset(
-                  'lib/images/chat.png',
-                  height: 200,
-                  width: 200,
+                  'lib/images/news.png',
+                  height: 100,
+                  width: 100,
+                  color: const Color.fromRGBO(86, 140, 125, 0.5),
                 ),
               ),
             ),
@@ -138,7 +139,7 @@ class _HomePageState extends State<HomePage>
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                _navigateToPage(2);
+                Navigator.pushNamed(context, '/publish_news');
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
@@ -154,7 +155,7 @@ class _HomePageState extends State<HomePage>
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 child: Text(
-                  'Começar a Conversar',
+                  'Publicar Notícias',
                   style: GoogleFonts.roboto(
                     textStyle: const TextStyle(
                       color: Color.fromRGBO(233, 242, 237, 0.8),

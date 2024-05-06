@@ -162,11 +162,11 @@ class _MakeNewsPageState extends State<MakeNewsPage> {
               border: OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.green,
+                  color: Color.fromRGBO(94, 191, 118, 0.9),
                 ),
               ),
               labelStyle: TextStyle(
-                color: Colors.green,
+                color: Color.fromRGBO(94, 191, 118, 0.9),
               ),
             ),
           ),
@@ -191,11 +191,11 @@ class _MakeNewsPageState extends State<MakeNewsPage> {
               border: OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.green,
+                  color: Color.fromRGBO(94, 191, 118, 0.9),
                 ),
               ),
               labelStyle: TextStyle(
-                color: Colors.green,
+                color: Color.fromRGBO(94, 191, 118, 0.9),
               ),
             ),
           ),
@@ -211,11 +211,11 @@ class _MakeNewsPageState extends State<MakeNewsPage> {
                 border: OutlineInputBorder(),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.green,
+                    color: Color.fromRGBO(94, 191, 118, 0.9),
                   ),
                 ),
                 labelStyle: TextStyle(
-                  color: Colors.green,
+                  color: Color.fromRGBO(94, 191, 118, 0.9),
                 ),
               ),
             ),

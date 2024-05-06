@@ -2,10 +2,13 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
+from flask import session
+import os
 
 app = Flask(__name__)
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.secret_key = os.urandom(24)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
@@ -67,6 +70,8 @@ def login():
 
 
 # envio de mensagens
+
+
 @app.route('/send_message', methods=['POST'])
 def send_message():
     data = request.json
@@ -153,6 +158,19 @@ def send_news():
 
     return jsonify({'message': 'News created successfully'})
 
+
+@app.route('/get_news', methods=['GET'])
+def get_news():
+    theme = request.args.get('theme')
+    if theme:
+        news = News.query.filter_by(theme=theme).all()
+    else:
+        news = News.query.all()
+
+    formatted_news = [{'id': news_item.id, 'title': news_item.title,
+                       'theme': news_item.theme, 'description': news_item.description} for news_item in news]
+
+    return jsonify({'news': formatted_news})
 
 
 if __name__ == '__main__':

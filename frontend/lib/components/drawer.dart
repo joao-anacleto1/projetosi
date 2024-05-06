@@ -52,19 +52,21 @@ class CustomAppBar extends StatelessWidget {
       actions: <Widget>[
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/');
+            Navigator.pushNamed(context, '/home');
           },
           child: Opacity(
             opacity: 1,
             child: Container(
               margin: const EdgeInsets.all(10.0),
               alignment: Alignment.center,
-              child: const Icon(Icons.person, size: 35,),
+              child: const Icon(
+                Icons.home,
+                size: 35,
+              ),
             ),
           ),
         ),
       ],
-
     );
   }
 }
