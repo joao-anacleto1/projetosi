@@ -1,8 +1,8 @@
+# Flask App
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
-from flask import session
 import os
 
 app = Flask(__name__)
@@ -38,23 +38,22 @@ def home():
     return jsonify({'message': 'Welcome to the DDoS App'})
 
 
-# registrar um novo utilizador
+# registar um novo user sem o validar
 @app.route('/register', methods=['POST'])
 def register():
     data = request.json
     username = data.get('username')
     password = data.get('password')
     email = data.get('email')
-    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-    new_user = User(username=username, password=hashed_password, email=email)
+    new_user = User(username=username, password=password, email=email)
     db.session.add(new_user)
     db.session.commit()
 
     return jsonify({'message': 'User registered successfully'})
 
 
-# login do utilizador
+# login de um user sem o validar
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -63,38 +62,13 @@ def login():
 
     user = User.query.filter_by(username=username).first()
 
-    if user and bcrypt.check_password_hash(user.password, password):
+    if user:
         return jsonify({'message': 'Login successful'})
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
 
 
-# envio de mensagens
-
-
-@app.route('/send_message', methods=['POST'])
-def send_message():
-    data = request.json
-    sender_id = data.get('sender_id')
-    content = data.get('content')
-
-    new_message = Message(sender_id=sender_id, content=content)
-    db.session.add(new_message)
-    db.session.commit()
-
-    return jsonify({'message': 'Message sent successfully'})
-
-
-# receber mensagens
-@app.route('/get_messages', methods=['GET'])
-def get_messages():
-    messages = Message.query.all()
-    formatted_messages = [{'id': message.id, 'sender_id': message.sender_id,
-                           'content': message.content} for message in messages]
-    return jsonify({'messages': formatted_messages})
-
-
-# editar o perfil de utilizador
+# editar o perfil de utilizador sem verificar a autenticação do mesmo
 @app.route('/edit_profile/<int:user_id>', methods=['PUT'])
 def edit_profile(user_id):
     user = User.query.get(user_id)
@@ -110,44 +84,27 @@ def edit_profile(user_id):
     return jsonify({'message': 'Profile updated successfully'})
 
 
-# eliminar uma mensagem
-@app.route('/delete_message/<int:message_id>', methods=['DELETE'])
-def delete_message(message_id):
-    message = Message.query.get(message_id)
-    if not message:
-        return jsonify({'message': 'Message not found'}), 404
-
-    db.session.delete(message)
-    db.session.commit()
-
-    return jsonify({'message': 'Message deleted successfully'})
-
-
-# mudança da password
+# mudar a password do user sem verificar a autenticação do mesmo
 @app.route('/change_password', methods=['POST'])
 def change_password():
     data = request.json
     username = data.get('username')
-    old_password = data.get('old_password')
     new_password = data.get('new_password')
 
     user = User.query.filter_by(username=username).first()
 
-    if not user or not bcrypt.check_password_hash(user.password, old_password):
-        return jsonify({'message': 'Invalid username or password'}), 401
-
-    hashed_new_password = bcrypt.generate_password_hash(
-        new_password).decode('utf-8')
-    user.password = hashed_new_password
-    db.session.commit()
-
-    return jsonify({'message': 'Password changed successfully'})
+    if user:
+        user.password = new_password
+        db.session.commit()
+        return jsonify({'message': 'Password changed successfully'})
+    else:
+        return jsonify({'message': 'User not found'}), 404
 
 
+# enviar noticias sem verificações de entrada
 @app.route('/send_news', methods=['POST'])
 def send_news():
     data = request.json
-    print(data)  # Adicione esta linha para verificar os dados recebidos
     title = data.get('title')
     theme = data.get('theme')
     description = data.get('description')
@@ -158,7 +115,7 @@ def send_news():
 
     return jsonify({'message': 'News created successfully'})
 
-
+# busca as noticias
 @app.route('/get_news', methods=['GET'])
 def get_news():
     theme = request.args.get('theme')
