@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 import os
+import time  # Importe o módulo time
 
 app = Flask(__name__)
 CORS(app)
@@ -35,12 +36,14 @@ class News(db.Model):
 
 @app.route('/')
 def home():
+    time.sleep(1)
     return jsonify({'message': 'Welcome to the DDoS App'})
 
 
 # registar um novo user sem o validar
 @app.route('/register', methods=['POST'])
 def register():
+    time.sleep(1)
     data = request.json
     username = data.get('username')
     password = data.get('password')
@@ -56,6 +59,7 @@ def register():
 # login de um user sem o validar
 @app.route('/login', methods=['POST'])
 def login():
+    time.sleep(1)
     data = request.json
     username = data.get('username')
     password = data.get('password')
@@ -71,6 +75,7 @@ def login():
 # editar o perfil de utilizador sem verificar a autenticação do mesmo
 @app.route('/edit_profile/<int:user_id>', methods=['PUT'])
 def edit_profile(user_id):
+    time.sleep(1)
     user = User.query.get(user_id)
     if not user:
         return jsonify({'message': 'User not found'}), 404
@@ -87,6 +92,7 @@ def edit_profile(user_id):
 # mudar a password do user sem verificar a autenticação do mesmo
 @app.route('/change_password', methods=['POST'])
 def change_password():
+    time.sleep(1)
     data = request.json
     username = data.get('username')
     new_password = data.get('new_password')
@@ -104,6 +110,7 @@ def change_password():
 # enviar noticias sem verificações de entrada
 @app.route('/send_news', methods=['POST'])
 def send_news():
+    time.sleep(1)
     data = request.json
     title = data.get('title')
     theme = data.get('theme')
@@ -116,8 +123,11 @@ def send_news():
     return jsonify({'message': 'News created successfully'})
 
 # busca as noticias
+
+
 @app.route('/get_news', methods=['GET'])
 def get_news():
+    time.sleep(1)
     theme = request.args.get('theme')
     if theme:
         news = News.query.filter_by(theme=theme).all()

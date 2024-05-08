@@ -15,7 +15,6 @@ def flood_messages():
             'description': 'Message Flood AlerttttttTTTTTTTTTTTTTTTT' * 8500
         }
 
-        # simula operação extensiva da gpu
         heavy_processing()
 
         # enviar a solicitação POST
