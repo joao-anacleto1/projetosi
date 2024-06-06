@@ -21,12 +21,6 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
 
 
-class Message(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-
-
 class News(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
@@ -70,23 +64,6 @@ def login():
         return jsonify({'message': 'Login successful'})
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
-
-
-# editar o perfil de utilizador sem verificar a autenticação do mesmo
-@app.route('/edit_profile/<int:user_id>', methods=['PUT'])
-def edit_profile(user_id):
-    time.sleep(1)
-    user = User.query.get(user_id)
-    if not user:
-        return jsonify({'message': 'User not found'}), 404
-
-    data = request.json
-    user.username = data.get('username', user.username)
-    user.email = data.get('email', user.email)
-
-    db.session.commit()
-
-    return jsonify({'message': 'Profile updated successfully'})
 
 
 # mudar a password do user sem verificar a autenticação do mesmo
